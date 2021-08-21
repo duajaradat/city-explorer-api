@@ -74,3 +74,12 @@ Finish time: __4:30___
 
 Actual time needed to complete: ___4.5 hrs__
 
+## Feature 05: Refactoring into Modules
+
+Estimate of time needed to complete: __1 hour___
+Start time: __9:00__
+
+Finish time: __9:45___
+
+Actual time needed to complete: ___45 min__
+
