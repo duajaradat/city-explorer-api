@@ -19,28 +19,36 @@ class Movies {
 
 }
 
+let inMemory = {};
+
 const getMovies = (request, response) => {
     let cityName = request.query.searchQuery;
 
 
+    if (inMemory[cityName] !== undefined) {
+        console.log('cache hit , data in-memory');
+        response.send(inMemory[cityName]);
+    } else {
+        console.log('cache miss, send to API')
+        let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_API_KEY}&query=${cityName}`
+        try {
+            axios.get(url).then(moviesResults => {  // get the url by axios and but the data in moviesResults.
+                let responseDataMovies = moviesResults.data.results.map(movie => {
+                    return new Movies(movie)
+                })
+                inMemory[cityName] = responseDataMovies;
+                console.log(inMemory);
+                response.send(responseDataMovies);
 
-    let url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIES_API_KEY}&query=${cityName}`
-    try {
-        axios.get(url).then(moviesResults => {  // get the url by axios and but the data in moviesResults.
-            let responseDataMovies = moviesResults.data.results.map(movie => {
-                return new Movies(movie)
+                console.log("pass")
+
             })
+            console.log("done")
+        } catch (error) {
+            console.log('error')
+            response.status(404).send("Something went wrong!");
 
-            response.send(responseDataMovies);
-
-            console.log("pass")
-
-        })
-        console.log("done")
-    } catch (error) {
-        console.log('error')
-        response.status(404).send("Something went wrong!");
-
+        }
     }
 }
 
