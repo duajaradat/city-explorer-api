@@ -88,6 +88,6 @@ Actual time needed to complete: ___45 min__
 Estimate of time needed to complete: __1 hour___
 Start time: __9:00__
 
-Finish time: __9:45___
+Finish time: __9:15___
 
-Actual time needed to complete: ___45 min__
+Actual time needed to complete: ___15 min__
